@@ -26,11 +26,11 @@ namespace TakeHome.Service
             return patient;
         }
 
-        public PatientModel GetById(int id)
-        {
-            var patient = _patients.FirstOrDefault(p => p.Id == id);
+        public PatientModel? GetById(int id)
+        {   var patient = _patients.FirstOrDefault(p => p.Id == id);
+
             if (patient == null)
-                throw new Exception("Patient not found");
+                throw new KeyNotFoundException("Patient not found.");
 
             return patient;
         }
@@ -59,7 +59,8 @@ namespace TakeHome.Service
         public PatientModel Update(int id, PatientModel dto)
         {
             var patient = GetById(id);
-
+            if (patient == null)
+                throw new KeyNotFoundException("Patient not found.");
             patient.FirstName = dto.FirstName ?? patient.FirstName;
             patient.LastName = dto.LastName ?? patient.LastName;
             patient.Email = dto.Email ?? patient.Email;

@@ -9,7 +9,7 @@ namespace TakeHome.API.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientService _service;
-        public PatientController(PatientService service)
+        public PatientController(IPatientService service)
         {
             _service = service;
         }
@@ -20,6 +20,7 @@ namespace TakeHome.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var created = _service.Create(patient);
+            // 201 response for created resource
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
