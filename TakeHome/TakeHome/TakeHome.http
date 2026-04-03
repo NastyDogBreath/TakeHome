@@ -1,0 +1,6 @@
+@TakeHome_HostAddress = http://localhost:5057
+
+GET {{TakeHome_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
